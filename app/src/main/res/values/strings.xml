@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Go</string>
+
+    <string name="new_game_label">New Game</string>
+    <string name="resume_game_label">Resume Game</string>
+    <string name="past_game_label">Past Games</string>
 </resources>
