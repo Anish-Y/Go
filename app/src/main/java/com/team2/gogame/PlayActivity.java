@@ -18,7 +18,7 @@ public class PlayActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        game = new Game();
+        game = new Game(1,);
         ButtonHandler bh = new ButtonHandler();
         Point size = new Point();
         getWindowManager().getDefaultDisplay().getSize(size);
