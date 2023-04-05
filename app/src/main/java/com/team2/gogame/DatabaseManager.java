@@ -69,7 +69,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sqlQuery, null);
         ArrayList<Game> games = new ArrayList<Game>();
         while (cursor.moveToNext()) {
-            Game currentGame = new Game(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getDouble(2));
+            Game currentGame = new Game(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
             games.add(currentGame);
         }
         db.close();
@@ -84,7 +84,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sqlQuery, null);
         Game Game = null;
         if (cursor.moveToFirst())
-            Game = new Game(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getDouble(2));
+            Game = new Game(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
         return Game;
     }
 
