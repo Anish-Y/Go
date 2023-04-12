@@ -14,11 +14,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button yourButton = (Button) findViewById(R.id.New_Game);
+        Button newGameButton = (Button) findViewById(R.id.New_Game);
+        Button pastGamesButton = (Button) findViewById(R.id.Past_Games);
 
-        yourButton.setOnClickListener(new View.OnClickListener(){
+        newGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 startActivity(new Intent(MainActivity.this, PlayActivity.class));
+            }
+        });
+
+        pastGamesButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                startActivity(new Intent(MainActivity.this, PastGamesActivity.class));
             }
         });
     }
