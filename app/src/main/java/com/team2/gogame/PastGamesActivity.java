@@ -1,6 +1,8 @@
 package com.team2.gogame;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -29,6 +31,11 @@ public class PastGamesActivity extends AppCompatActivity {
             Button b = new Button(this);
             b.setId(game.getId());
             b.setText(game.toString());
+            b.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    startActivity(new Intent(PastGamesActivity.this, PastGamesActivity.class));
+                }
+            });
             group.addView(b);
         }
         s.addView(group);
