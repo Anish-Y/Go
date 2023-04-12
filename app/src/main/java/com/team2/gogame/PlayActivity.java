@@ -7,6 +7,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsoluteLayout;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,7 +39,8 @@ public class PlayActivity extends AppCompatActivity {
 
     private class ButtonHandler implements View.OnClickListener {
         public void onClick(View v) {
-
+            Button b = (Button) v;
+            game.editStone(game.getColor(), b.getId());
         }
     }
 }

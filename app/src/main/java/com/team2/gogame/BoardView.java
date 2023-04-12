@@ -39,7 +39,10 @@ public class BoardView extends GridLayout {
                 Resources res = getResources();
                 Drawable drawable = ResourcesCompat.getDrawable(res, R.drawable.round_button, null);
                 buttons[row][col].setBackground(drawable);
+
                 buttons[row][col].setOnClickListener(listener);
+
+                buttons[row][col].setId(col + row*side);
             }
         }
 

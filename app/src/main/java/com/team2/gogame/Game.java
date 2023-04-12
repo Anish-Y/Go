@@ -16,8 +16,10 @@ public class Game {
     private int[][] game;
     private int n = 9;
     private int[][] nbList;
+    private char color;
 
     public Game(int id, String date, String moves) {
+        color = '0';
         this.id = id;
         this.date = date;
         this.moves = moves;
@@ -31,6 +33,10 @@ public class Game {
         {
             nbList[i] = neighbors(i);
         }
+    }
+
+    public char getColor() {
+        return color;
     }
 
     public String toString() {
@@ -123,7 +129,9 @@ public class Game {
     /** Illegal Move **/
 
     public String editStone(char color, int compressedCoord) {
-        return board.substring(0, compressedCoord) + color + board.substring(compressedCoord + 1);
+        char ocolor = color;
+        color = (color == '0') ? '1' : '0';
+        return board.substring(0, compressedCoord) + ocolor + board.substring(compressedCoord + 1);
     }
 
     public String bulkEditStones(char color, Set<Integer> positions) {
