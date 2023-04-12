@@ -33,6 +33,10 @@ public class Game {
         }
     }
 
+    public String toString() {
+        return date + " Game " + id;
+    }
+
     public int getId() {
         return id;
     }
