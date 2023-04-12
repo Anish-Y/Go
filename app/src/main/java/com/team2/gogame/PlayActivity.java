@@ -1,5 +1,6 @@
 package com.team2.gogame;
 
+import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.View;
@@ -21,41 +22,29 @@ public class PlayActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_play);
         game = new Game(1,"","");
         ButtonHandler bh = new ButtonHandler();
         Point size = new Point();
         getWindowManager().getDefaultDisplay().getSize(size);
         board = new BoardView(this, 9, size.x, bh);
 
-        ImageView background = new ImageView(this);
-        background.setImageResource(R.drawable.board);
-        background.setAdjustViewBounds(true);
-        background.setScaleType(ImageView.ScaleType.FIT_START);
-        background.setMinimumHeight(size.x);
-        background.setMinimumWidth(size.x);
-
-        ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(size.x,size.x);
-
-        background.setLayoutParams(lp);
+//        this.addView(board);
 
 
-        RelativeLayout layout = new RelativeLayout(this);
-        layout.addView(board);
-
-
-        layout.addView(background);
-//        background.setX();
-        background.setScaleX(size.x);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(size.x,size.x);
-
-        params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        layout.setLayoutParams(params);
-
-//        background.setScaleX(2);
+//        layout.addView(background);
+////        background.setX();
+//        background.setScaleX(size.x);
+//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(size.x,size.x);
+//
+//        params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+//        layout.setLayoutParams(params);
+//
+////        background.setScaleX(2);
 
 
 
-        setContentView(layout);
+        setContentView(board);
 
     }
 
