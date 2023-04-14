@@ -87,7 +87,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
             Game = new Game(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
         return Game;
     }
-
 }
 
 

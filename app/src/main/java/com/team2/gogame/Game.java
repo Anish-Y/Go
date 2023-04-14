@@ -1,6 +1,9 @@
 package com.team2.gogame;
 
+import android.util.Log;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
@@ -55,6 +58,14 @@ public class Game {
         return moves;
     }
 
+    public int getN() {
+        return n;
+    }
+
+    public String getBoard(){
+        return board;
+    }
+
     public void updateMoves(String move) {
         moves += " " + move;
     }
@@ -65,13 +76,13 @@ public class Game {
 
     public int[] decompress(int compressedCoord) {
         int[] coord = new int[2];
-        coord[0] = compressedCoord / 19;
-        coord[1] = compressedCoord % 19;
+        coord[0] = compressedCoord / n;
+        coord[1] = compressedCoord % n;
         return coord;
     }
 
     public boolean onBoard(int[] coord) {
-        return coord[0] % n == coord[0] && coord[1] % n == coord[1];
+        return coord[0] >= 0 && coord[1] >= 0 && coord[0] < n && coord[1] < n;
     }
 
     public int[] neighbors(int compressedCoord) {
@@ -130,14 +141,15 @@ public class Game {
 
     public String editStone(char color, int compressedCoord) {
         char ocolor = color;
-        color = (color == '0') ? '1' : '0';
+        this.color = (color == '0') ? '1' : '0';
+        updateMoves(compressedCoord + "");
         return board.substring(0, compressedCoord) + ocolor + board.substring(compressedCoord + 1);
     }
 
     public String bulkEditStones(char color, Set<Integer> positions) {
         String ret = board;
         for(int p : positions) {
-            ret = board.substring(0, p) + color + board.substring(p + 1);
+            ret = ret.substring(0, p) + color + ret.substring(p + 1);
         }
         return ret;
     }
@@ -152,6 +164,7 @@ public class Game {
                 break;
             }
         }
+        Log.w("game", chain.toString());
         if(b) {
             board = bulkEditStones(' ', chain);
             return chain;
@@ -169,6 +182,7 @@ public class Game {
         char oppColor = color == '0' ? '1' : '0';
         ArrayList<Integer> oppStones = new ArrayList<Integer>();
         ArrayList<Integer> myStones = new ArrayList<Integer>();
+        Log.w("game", Arrays.toString(nbList[0]));
         for(int t : nbList[compressedCoord]) {
             if(board.charAt(t) == color) {
                 myStones.add(t);
@@ -178,10 +192,10 @@ public class Game {
         }
 
         for(int t : oppStones) {
-            capture(compressedCoord);
+            capture(t);
         }
         for(int t : myStones) {
-            capture(compressedCoord);
+            capture(t);
         }
     }
 }

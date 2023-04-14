@@ -1,8 +1,11 @@
 package com.team2.gogame;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,7 @@ import android.widget.TableLayout;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 public class PlayActivity extends AppCompatActivity {
     private Game game;
@@ -28,7 +32,7 @@ public class PlayActivity extends AppCompatActivity {
         ButtonHandler bh = new ButtonHandler();
         Point size = new Point();
         getWindowManager().getDefaultDisplay().getSize(size);
-        board = new BoardView(this, 9, size.x, bh);
+        board = new BoardView(this, game.getN(), size.x, bh);
 
         setContentView(R.layout.activity_play);
         ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this
@@ -40,7 +44,12 @@ public class PlayActivity extends AppCompatActivity {
     private class ButtonHandler implements View.OnClickListener {
         public void onClick(View v) {
             Button b = (Button) v;
-            game.editStone(game.getColor(), b.getId());
+            char color = game.getColor();
+            game.playMoveIncomplete(b.getId(),game.getColor());
+            board.update(game.getBoard());
+            Log.w("play", game.getBoard());
+
+
         }
     }
 }
