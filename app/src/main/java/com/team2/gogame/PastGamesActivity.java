@@ -33,7 +33,10 @@ public class PastGamesActivity extends AppCompatActivity {
             b.setText(game.toString());
             b.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    startActivity(new Intent(PastGamesActivity.this, PastGamesActivity.class));
+                    Intent i = new Intent(PastGamesActivity.this, PastGamesActivity.class);
+                    int id = 0;
+                    i.putExtra("game.getId()", id);
+                    startActivity(i);
                 }
             });
             group.addView(b);
