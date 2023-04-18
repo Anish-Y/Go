@@ -82,11 +82,12 @@ public class DatabaseManager extends SQLiteOpenHelper {
         String sqlQuery = "select * from " + TABLE_GAME;
         sqlQuery += " where " + ID + " = " + id;
         Cursor cursor = db.rawQuery(sqlQuery, null);
-        Game Game = null;
+        Game game = null;
         if (cursor.moveToFirst())
-            Game = new Game(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
-        return Game;
+            game = new Game(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
+        return game;
     }
+
 }
 
 

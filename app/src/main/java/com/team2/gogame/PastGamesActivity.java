@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
@@ -26,7 +27,8 @@ public class PastGamesActivity extends AppCompatActivity {
 
         DatabaseManager d = new DatabaseManager(this);
         ArrayList<Game> games = d.selectAll();
-        RelativeLayout group = new RelativeLayout(this);
+        GridLayout group = new GridLayout(this);
+        group.setColumnCount(1);
         for(Game game : games) {
             Button b = new Button(this);
             b.setId(game.getId());

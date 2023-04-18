@@ -26,6 +26,10 @@
             android:name=".PlayActivity">
 
         </activity>
+        <activity
+            android:name=".PastGamesActivity">
+
+        </activity>
     </application>
 
 </manifest>

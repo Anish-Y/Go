@@ -1,6 +1,7 @@
 package com.team2.gogame;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
@@ -24,11 +25,13 @@ import androidx.core.content.res.ResourcesCompat;
 public class PlayActivity extends AppCompatActivity {
     private Game game;
     private BoardView board;
-
+    private DatabaseManager dbm;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        game = new Game(1,"","");
+        dbm = new DatabaseManager(this);
+        game = dbm.selectById(dbm.selectAll().size());
+
         ButtonHandler bh = new ButtonHandler();
         Point size = new Point();
         getWindowManager().getDefaultDisplay().getSize(size);
@@ -38,18 +41,28 @@ public class PlayActivity extends AppCompatActivity {
         ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this
                 .findViewById(android.R.id.content)).getChildAt(0);
         viewGroup.addView(board);
+
+        Button endGameButton = findViewById(R.id.EndGame);
+        endGameButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                dbm.insert(game);
+                startActivity(new Intent(PlayActivity.this, MainActivity.class));
+
+            }
+        });
     }
 
 
     private class ButtonHandler implements View.OnClickListener {
         public void onClick(View v) {
+
             Button b = (Button) v;
             char color = game.getColor();
             game.playMoveIncomplete(b.getId(),game.getColor());
             board.update(game.getBoard());
             Log.w("play", game.getBoard());
 
-
+            dbm.updateById(game.getId(), "", game.getMoves());
         }
     }
 }
