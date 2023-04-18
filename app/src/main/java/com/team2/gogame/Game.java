@@ -15,8 +15,6 @@ public class Game {
     private String date;
     private String moves;
     private String board;
-    private int turn;
-    private int[][] game;
     private int n = 9;
     private int[][] nbList;
     private char color;
