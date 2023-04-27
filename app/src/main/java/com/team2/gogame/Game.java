@@ -19,12 +19,12 @@ public class Game {
     private int[][] nbList;
     private char color;
 
-    public Game(int id, String date, String moves) {
+    public Game(int id, String date, String moves, String board) {
         color = '0';
         this.id = id;
         this.date = date;
         this.moves = moves;
-        board = "";
+        this.board = board;
         nbList = new int[n*n][4];
 
         for(int i = 0; i < n*n; i++) {

@@ -30,7 +30,8 @@ public class PlayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dbm = new DatabaseManager(this);
-        game = dbm.selectById(dbm.selectAll().size());
+        int ideeee = dbm.selectAll().get(dbm.selectAll().size()-1).getId();
+        game = dbm.selectById(ideeee);
 
         ButtonHandler bh = new ButtonHandler();
         Point size = new Point();
@@ -45,7 +46,6 @@ public class PlayActivity extends AppCompatActivity {
         Button endGameButton = findViewById(R.id.EndGame);
         endGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                dbm.insert(game);
                 startActivity(new Intent(PlayActivity.this, MainActivity.class));
 
             }
@@ -57,11 +57,11 @@ public class PlayActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             Button b = (Button) v;
-            char color = game.getColor();
+
             game.playMoveIncomplete(b.getId(),game.getColor());
             board.update(game.getBoard());
             Log.w("play", game.getBoard());
-
+            Log.w("play", ""+game.getId());
             dbm.updateById(game.getId(), "", game.getMoves());
         }
     }

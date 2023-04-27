@@ -15,6 +15,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String ID = "id";
     private static final String DATE = "date";
     private static final String MOVES = "moves";
+    private static final String BOARD = "board";
 
     public DatabaseManager(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -24,7 +25,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
         // build sql create statement
         String sqlCreate = "create table " + TABLE_GAME + "( " + ID;
         sqlCreate += " integer primary key autoincrement, " + DATE;
-        sqlCreate += " text, " + MOVES + " real )";
+        sqlCreate += " text, " + MOVES;
+        sqlCreate += " text, " + BOARD + " text )";
         db.execSQL(sqlCreate);
     }
 
@@ -40,7 +42,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlInsert = "insert into " + TABLE_GAME;
         sqlInsert += " values( null, '" + game.getDate();
-        sqlInsert += "', '" + game.getMoves() + "' )";
+        sqlInsert += "', '" + game.getMoves() ;
+        sqlInsert += "', '" + game.getBoard() + "' )";
         db.execSQL(sqlInsert);
         db.close();
     }
@@ -57,7 +60,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlString = "UPDATE " + TABLE_GAME + " SET " + DATE + " = " + "\"" + date + "\"" + " WHERE " + ID + " = " + id;
         db.execSQL(sqlString);
-        sqlString = "UPDATE " + TABLE_GAME + " SET " + MOVES + " = " + moves + " WHERE " + ID + " = " + id;
+        sqlString = "UPDATE " + TABLE_GAME + " SET " + MOVES + " = " + "\"" + moves + "\"" + " WHERE " + ID + " = " + id;
         db.execSQL(sqlString);
         db.close();
     }
@@ -71,6 +74,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         while (cursor.moveToNext()) {
             Game currentGame = new Game(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
             games.add(currentGame);
+            Log.w("dbm", currentGame.getId() + "");
         }
         db.close();
         return games;

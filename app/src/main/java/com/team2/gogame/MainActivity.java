@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -24,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
         newGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                int size = DBM.selectAll().size();
-                DBM.deleteById(size);
-                DBM.insert(new Game(size,"",""));
+                int ideeee = DBM.selectAll().get(DBM.selectAll().size()-1).getId();
+                Log.w("main", ""+ideeee);
+                DBM.insert(new Game(ideeee,"",""));
                 startActivity(new Intent(MainActivity.this, PlayActivity.class));
             }
         });
