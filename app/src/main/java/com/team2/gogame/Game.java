@@ -28,7 +28,7 @@ public class Game {
         nbList = new int[n*n][4];
 
         for(int i = 0; i < n*n; i++) {
-            board += " ";
+            this.board += " ";
         }
         for(int i = 0; i < n*n; i++)
         {

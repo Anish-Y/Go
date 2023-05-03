@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class DatabaseManager extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "goDB";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String TABLE_GAME = "games";
     private static final String ID = "id";
     private static final String DATE = "date";
@@ -56,11 +56,13 @@ public class DatabaseManager extends SQLiteOpenHelper {
     }
 
     // Update Game record
-    public void updateById(int id, String date, String moves) {
+    public void updateById(int id, String date, String moves, String board) {
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlString = "UPDATE " + TABLE_GAME + " SET " + DATE + " = " + "\"" + date + "\"" + " WHERE " + ID + " = " + id;
         db.execSQL(sqlString);
         sqlString = "UPDATE " + TABLE_GAME + " SET " + MOVES + " = " + "\"" + moves + "\"" + " WHERE " + ID + " = " + id;
+        db.execSQL(sqlString);
+        sqlString = "UPDATE " + TABLE_GAME + " SET " + BOARD + " = " + "\"" + board + "\"" + " WHERE " + ID + " = " + id;
         db.execSQL(sqlString);
         db.close();
     }
@@ -72,7 +74,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sqlQuery, null);
         ArrayList<Game> games = new ArrayList<Game>();
         while (cursor.moveToNext()) {
-            Game currentGame = new Game(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
+            Game currentGame = new Game(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3));
             games.add(currentGame);
             Log.w("dbm", currentGame.getId() + "");
         }
@@ -88,7 +90,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sqlQuery, null);
         Game game = null;
         if (cursor.moveToFirst())
-            game = new Game(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
+            game = new Game(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3));
         return game;
     }
 

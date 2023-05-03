@@ -18,23 +18,29 @@ public class MainActivity extends AppCompatActivity {
 
         DBM = new DatabaseManager(this);
 
-
         Button newGameButton = (Button) findViewById(R.id.New_Game);
         Button resumeGameButton = (Button) findViewById(R.id.Resume_Game);
         Button pastGamesButton = (Button) findViewById(R.id.Past_Games);
 
         newGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                int ideeee = DBM.selectAll().get(DBM.selectAll().size()-1).getId();
-                Log.w("main", ""+ideeee);
-                DBM.insert(new Game(ideeee,"",""));
+                if(DBM.selectAll().size() > 0) {
+                    int id = DBM.selectAll().get(DBM.selectAll().size()-1).getId();
+                    Log.w("main", ""+id);
+                    DBM.insert(new Game(id,"","", ""));
+                } else {
+                    DBM.insert(new Game(1,"","", ""));
+                }
                 startActivity(new Intent(MainActivity.this, PlayActivity.class));
             }
         });
 
         resumeGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                startActivity(new Intent(MainActivity.this, PlayActivity.class));
+                String moves = DBM.selectAll().get(DBM.selectAll().size()-1).getMoves();
+                if(moves.length() > 0) {
+                    startActivity(new Intent(MainActivity.this, PlayActivity.class));
+                }
             }
         });
 

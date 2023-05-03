@@ -30,6 +30,10 @@
             android:name=".PastGamesActivity">
 
         </activity>
+        <activity
+            android:name=".ReviewActivity">
+
+        </activity>
     </application>
 
 </manifest>

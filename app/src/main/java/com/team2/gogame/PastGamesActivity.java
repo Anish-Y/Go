@@ -35,9 +35,9 @@ public class PastGamesActivity extends AppCompatActivity {
             b.setText(game.toString());
             b.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Intent i = new Intent(PastGamesActivity.this, PastGamesActivity.class);
-                    int id = 0;
-                    i.putExtra("game.getId()", id);
+                    Intent i = new Intent(PastGamesActivity.this, ReviewActivity.class);
+                    String s = "" + game.getId();
+                    i.putExtra("id", s);
                     startActivity(i);
                 }
             });

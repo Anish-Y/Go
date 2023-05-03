@@ -30,8 +30,8 @@ public class PlayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dbm = new DatabaseManager(this);
-        int ideeee = dbm.selectAll().get(dbm.selectAll().size()-1).getId();
-        game = dbm.selectById(ideeee);
+        int id = dbm.selectAll().get(dbm.selectAll().size()-1).getId();
+        game = dbm.selectById(id);
 
         ButtonHandler bh = new ButtonHandler();
         Point size = new Point();
@@ -43,9 +43,14 @@ public class PlayActivity extends AppCompatActivity {
                 .findViewById(android.R.id.content)).getChildAt(0);
         viewGroup.addView(board);
 
+        board.update(game.getBoard());
+
         Button endGameButton = findViewById(R.id.EndGame);
         endGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
+                int id = dbm.selectAll().get(dbm.selectAll().size()-1).getId();
+                Log.w("main", ""+id);
+                dbm.insert(new Game(id,"","", ""));
                 startActivity(new Intent(PlayActivity.this, MainActivity.class));
 
             }
@@ -62,7 +67,7 @@ public class PlayActivity extends AppCompatActivity {
             board.update(game.getBoard());
             Log.w("play", game.getBoard());
             Log.w("play", ""+game.getId());
-            dbm.updateById(game.getId(), "", game.getMoves());
+            dbm.updateById(game.getId(), "", game.getMoves(), game.getBoard());
         }
     }
 }
