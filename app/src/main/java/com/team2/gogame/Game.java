@@ -114,7 +114,7 @@ public class Game {
     public ArrayList<Set<Integer>> findReached(int compressedCoord) {
         char color = board.charAt(compressedCoord);
         Set<Integer> chain = new HashSet<Integer>();
-        chain.add(compressedCoord);
+        //chain.add(compressedCoord);
         Set<Integer> reached = new HashSet<Integer>();
         Stack<Integer> frontier = new Stack<Integer>();
         frontier.add(compressedCoord);
@@ -180,7 +180,7 @@ public class Game {
         char oppColor = color == '0' ? '1' : '0';
         ArrayList<Integer> oppStones = new ArrayList<Integer>();
         ArrayList<Integer> myStones = new ArrayList<Integer>();
-        Log.w("game", Arrays.toString(nbList[0]));
+        //Log.w("game", Arrays.toString(nbList[0]));
         for(int t : nbList[compressedCoord]) {
             if(board.charAt(t) == color) {
                 myStones.add(t);
@@ -188,11 +188,14 @@ public class Game {
                 oppStones.add(t);
             }
         }
+        myStones.add(compressedCoord);
 
         for(int t : oppStones) {
+            Log.w("game1o", ""+t);
             capture(t);
         }
         for(int t : myStones) {
+            Log.w("game1", ""+t);
             capture(t);
         }
     }

@@ -67,7 +67,7 @@ public class PlayActivity extends AppCompatActivity {
             board.update(game.getBoard());
             Log.w("play", game.getBoard());
             Log.w("play", ""+game.getId());
-            dbm.updateById(game.getId(), "", game.getMoves(), game.getBoard());
+            dbm.updateById(game.getId(), game.getDate(), game.getMoves(), game.getBoard());
         }
     }
 }
