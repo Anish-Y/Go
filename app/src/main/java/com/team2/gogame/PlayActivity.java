@@ -22,6 +22,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class PlayActivity extends AppCompatActivity {
     private Game game;
     private BoardView board;
@@ -50,7 +53,8 @@ public class PlayActivity extends AppCompatActivity {
             public void onClick(View v){
                 int id = dbm.selectAll().get(dbm.selectAll().size()-1).getId();
                 Log.w("main", ""+id);
-                dbm.insert(new Game(id,"","", ""));
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                dbm.insert(new Game(id, dateFormat.format(Calendar.getInstance().getTime()),"", ""));
                 startActivity(new Intent(PlayActivity.this, MainActivity.class));
 
             }

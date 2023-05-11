@@ -20,7 +20,7 @@ public class Game {
     private char color;
 
     public Game(int id, String date, String moves, String board) {
-        color = '0';
+        color = moves.split(" ").length % 2 == 0 ? '1' : '0';
         this.id = id;
         this.date = date;
         this.moves = moves;

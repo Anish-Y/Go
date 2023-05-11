@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class DatabaseManager extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "goDB";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 4;
     private static final String TABLE_GAME = "games";
     private static final String ID = "id";
     private static final String DATE = "date";

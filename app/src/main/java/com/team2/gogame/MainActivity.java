@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -39,9 +40,12 @@ public class MainActivity extends AppCompatActivity {
                     date = dateFormat.format(calendar.getTime());
                     DBM.insert(new Game(id,date,"", ""));
                 } else {
+                    dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                    date = dateFormat.format(calendar.getTime());
                     DBM.insert(new Game(1,date,"", ""));
                 }
                 startActivity(new Intent(MainActivity.this, PlayActivity.class));
+                Toast.makeText(MainActivity.this, "Good luck!", Toast.LENGTH_SHORT).show();
             }
         });
 
